@@ -3,9 +3,9 @@ package com.example.webservice_json
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.webservice_json.adapter.UserListAdapter
 import com.example.webservice_json.data.User
+import com.example.webservice_json.databinding.ActivityMainBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.CoroutineScope
@@ -16,14 +16,15 @@ import kotlinx.coroutines.withContext
 class MainActivity : AppCompatActivity() {
     private val gson = Gson()
     private lateinit var adapter: UserListAdapter
-    private lateinit var recyclerView: RecyclerView
+//    private lateinit var recyclerView: RecyclerView
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         adapter = UserListAdapter()
-        recyclerView = findViewById(R.id.recycler_view)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
         loadData()
     }
     private fun loadData() {

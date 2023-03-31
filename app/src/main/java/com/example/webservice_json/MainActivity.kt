@@ -16,7 +16,6 @@ import kotlinx.coroutines.withContext
 class MainActivity : AppCompatActivity() {
     private val gson = Gson()
     private lateinit var adapter: UserListAdapter
-//    private lateinit var recyclerView: RecyclerView
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,12 +26,14 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         loadData()
     }
+
     private fun loadData() {
         val userApi = RetrofitClient.create()
         CoroutineScope(Dispatchers.IO).launch {
             val response = userApi.getUser()
-            val users = gson.fromJson<List<User>>(response.string(),
-                object : TypeToken<List<User>>() {}.type)
+            val users = gson.fromJson<List<User>>(
+                response.string(), object : TypeToken<List<User>>() {}.type
+            )
             withContext(Dispatchers.Main) {
                 adapter.setUser(users)
             }

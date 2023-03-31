@@ -11,11 +11,6 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
     private var users: List<User> = listOf()
 
     @SuppressLint("NotifyDataSetChanged")
-//    fun setUsers(users: List<User>) {
-//        this.users = users
-//        notifyDataSetChanged()
-//    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val view = UserListItemBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
